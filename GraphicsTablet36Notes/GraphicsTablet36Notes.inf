@@ -1,0 +1,93 @@
+;
+; GraphicsTablet36Notes.inf
+;
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Sample ; TODO: edit Class
+ClassGuid={78A1C341-4539-11d3-B88D-00C04FAD5171} ; TODO: edit ClassGuid
+Provider=%ManufacturerName%
+CatalogFile=GraphicsTablet36Notes.cat
+DriverVer= ; TODO: set DriverVer in stampinf property pages
+
+[DestinationDirs]
+DefaultDestDir = 12
+GraphicsTablet36Notes_Device_CoInstaller_CopyFiles = 11
+
+; ================= Class section =====================
+
+[ClassInstall32]
+Addreg=SampleClassReg
+
+[SampleClassReg]
+HKR,,,0,%ClassName%
+HKR,,Icon,,-5
+
+[SourceDisksNames]
+1 = %DiskName%,,,""
+
+[SourceDisksFiles]
+GraphicsTablet36Notes.sys  = 1,,
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll=1 ; make sure the number matches with SourceDisksNames
+
+;*****************************************
+; Install Section
+;*****************************************
+
+[Manufacturer]
+%ManufacturerName%=Standard,NT$ARCH$
+
+[Standard.NT$ARCH$]
+%GraphicsTablet36Notes.DeviceDesc%=GraphicsTablet36Notes_Device, Root\GraphicsTablet36Notes ; TODO: edit hw-id
+
+[GraphicsTablet36Notes_Device.NT]
+CopyFiles=Drivers_Dir
+
+[Drivers_Dir]
+GraphicsTablet36Notes.sys
+
+;-------------- Service installation
+[GraphicsTablet36Notes_Device.NT.Services]
+AddService = GraphicsTablet36Notes,%SPSVCINST_ASSOCSERVICE%, GraphicsTablet36Notes_Service_Inst
+
+; -------------- GraphicsTablet36Notes driver install sections
+[GraphicsTablet36Notes_Service_Inst]
+DisplayName    = %GraphicsTablet36Notes.SVCDESC%
+ServiceType    = 1               ; SERVICE_KERNEL_DRIVER
+StartType      = 3               ; SERVICE_DEMAND_START
+ErrorControl   = 1               ; SERVICE_ERROR_NORMAL
+ServiceBinary  = %12%\GraphicsTablet36Notes.sys
+
+;
+;--- GraphicsTablet36Notes_Device Coinstaller installation ------
+;
+
+[GraphicsTablet36Notes_Device.NT.CoInstallers]
+AddReg=GraphicsTablet36Notes_Device_CoInstaller_AddReg
+CopyFiles=GraphicsTablet36Notes_Device_CoInstaller_CopyFiles
+
+[GraphicsTablet36Notes_Device_CoInstaller_AddReg]
+HKR,,CoInstallers32,0x00010000, "WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll,WdfCoInstaller"
+
+[GraphicsTablet36Notes_Device_CoInstaller_CopyFiles]
+WdfCoInstaller$KMDFCOINSTALLERVERSION$.dll
+
+[GraphicsTablet36Notes_Device.NT.Wdf]
+KmdfService =  GraphicsTablet36Notes, GraphicsTablet36Notes_wdfsect
+[GraphicsTablet36Notes_wdfsect]
+KmdfLibraryVersion = $KMDFVERSION$
+
+[Strings]
+SPSVCINST_ASSOCSERVICE= 0x00000002
+ManufacturerName="PLUVETO" ;TODO: Replace with your manufacturer name
+ClassName="Samples" ; TODO: edit ClassName
+DiskName = "GraphicsTablet36Notes Installation Disk"
+GraphicsTablet36Notes.DeviceDesc = "GraphicsTablet36Notes Device"
+GraphicsTablet36Notes.SVCDESC = "GraphicsTablet36Notes Service"
+
+
+[GraphicsTablet36Notes_Device.NT.HW]
+AddReg = GraphicsTablet36Notes_Device.NT.AddReg
+
+[GraphicsTablet36Notes_Device.NT.AddReg]
+HKR,,"LowerFilters",0x00010000,"vhf"

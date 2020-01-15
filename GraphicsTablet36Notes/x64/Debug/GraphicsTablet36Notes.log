@@ -1,0 +1,23 @@
+﻿  Building 'GraphicsTablet36Notes' with toolset 'WindowsKernelModeDriver10.0' and the 'Universal' target platform.
+  Stamping x64\Debug\GraphicsTablet36Notes.inf
+  Stamping [Version] section with DriverVer=01/15/2020,12.4.48.297
+  driver.c
+  GraphicsTablet36Notes.vcxproj -> C:\Users\pluveto\source\repos\GraphicsTablet36Notes\x64\Debug\GraphicsTablet36Notes.sys
+  Done Adding Additional Store
+  Successfully signed: C:\Users\pluveto\source\repos\GraphicsTablet36Notes\x64\Debug\GraphicsTablet36Notes.sys
+  
+  Driver is a Universal Driver.
+  .........................
+  Signability test complete.
+  
+  Errors:
+  None
+  
+  Warnings:
+  None
+  
+  Catalog generation complete.
+  C:\Users\pluveto\source\repos\GraphicsTablet36Notes\x64\Debug\GraphicsTablet36Notes\graphicstablet36notes.cat
+  Done Adding Additional Store
+  Successfully signed: C:\Users\pluveto\source\repos\GraphicsTablet36Notes\x64\Debug\GraphicsTablet36Notes\graphicstablet36notes.cat
+  
